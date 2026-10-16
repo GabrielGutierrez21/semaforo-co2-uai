@@ -13,11 +13,11 @@ constexpr uint8_t PIN_AMARILLO = 26;
 constexpr uint8_t PIN_ROJO = 27;
 constexpr uint8_t PIN_BUZZER = 32; // Base de transistor NPN, nunca buzzer directo de potencia.
 constexpr uint8_t PIN_PRUEBA = 33; // Pulsador a GND; INPUT_PULLUP.
-constexpr bool USAR_BUZZER = true; // false si se omite el buzzer.
+constexpr bool USAR_BUZZER = false; // Activar solo con buzzer activo y etapa de manejo verificados.
 
 // Red local: el ESP32 funciona sin Internet y sin servidor externo.
 const char* SSID_LOCAL = "Semaforo-CO2-UAI";
-const char* CLAVE_LOCAL = "AulaCO2-2026"; // Cambiar antes de una demo pública.
+char claveLocal[17]; // Se crea una nueva clave aleatoria en cada arranque.
 
 SensirionI2cScd4x sensor;
 WebServer servidor(80);
@@ -186,13 +186,17 @@ void setup() {
   sensor.begin(Wire, 0x62); // SCD40/SCD41: misma dirección I2C.
   iniciarSensor();
   WiFi.mode(WIFI_AP);
-  redLocal = WiFi.softAP(SSID_LOCAL, CLAVE_LOCAL);
+  snprintf(claveLocal, sizeof(claveLocal), "%08lX%08lX",
+           (unsigned long)esp_random(), (unsigned long)esp_random());
+  redLocal = WiFi.softAP(SSID_LOCAL, claveLocal);
   if (redLocal) {
     servidor.on("/", []() { servidor.send_P(200, "text/html; charset=utf-8", PAGINA); });
     servidor.on("/api", responderApi);
     servidor.begin();
     Serial.print("Pagina local: http://");
     Serial.println(WiFi.softAPIP());
+    Serial.print("Clave temporal de la red local: ");
+    Serial.println(claveLocal);
   } else Serial.println("Red local no disponible; semaforo autonomo activo.");
   Serial.println("ms,ppm,temperatura_C,humedad_pct,estado,modo");
 }
