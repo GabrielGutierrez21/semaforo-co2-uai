@@ -1,10 +1,12 @@
-// Carcasa conceptual paramétrica para ESP32 DevKit y breakout Adafruit SCD40.
-// Todas las medidas en mm. Medir componentes reales antes de imprimir.
+// Carcasa conceptual paramétrica para ESP32 DevKit y breakout SCD40/SCD41.
+// Todas las medidas en mm. Cada pieza queda por debajo de 100 x 100 x 100 mm,
+// volumen máximo sugerido por el DEC UAI. Medir componentes antes de imprimir.
+// No se corta ventana para OLED hasta conocer el módulo físico y su orientación.
 // Exportación: openscad -o base.stl -D 'parte="base"' carcasa.scad
 //              openscad -o tapa.stl -D 'parte="tapa"' carcasa.scad
 
 parte = "conjunto"; // "base", "tapa" o "conjunto"
-ancho = 120;
+ancho = 96;
 alto = 76;
 profundidad_base = 28;
 pared = 2.4;
@@ -41,10 +43,10 @@ module base() {
     // Abertura de USB en el lado izquierdo: ajustar posición según placa.
     translate([-ancho/2-1,-10,8]) cube([pared+3,20,12]);
     // Ranuras en piso para bridas de montaje ajustables del ESP32.
-    for(x=[-38,-8],y=[-15,15])
+    for(x=[-34,-12],y=[-15,15])
       translate([x,y,0]) cube([3,8,pared*3],center=true);
     // Ranuras para fijar el breakout SCD40 junto a ventilación.
-    for(x=[22,46],y=[-12,12])
+    for(x=[20,39],y=[-12,12])
       translate([x,y,0]) cube([3,6,pared*3],center=true);
   }
 }
