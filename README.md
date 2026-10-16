@@ -14,7 +14,7 @@ Prototipo alfa autónomo: un SCD40 mide CO₂ real, el ESP32 enciende una de tre
 6. Verificar el pulsador: cada pulsación cambia **REAL → PRUEBA VERDE → PRUEBA AMARILLO → PRUEBA ROJO → REAL**. En prueba se simulan solo las luces; la página sigue mostrando ppm reales y etiqueta claramente el modo.
 7. Medir las placas reales. Abrir `cad/carcasa.scad` en OpenSCAD; ajustar `ancho`, `alto`, USB, orificios LED y ranuras. Imprimir base/tapa después de revisar el archivo en el laminador con personal del DEC. Los STL adjuntos son únicamente una **versión conceptual**.
 8. Guardar tres ensayos de cinco minutos siguiendo [pruebas_y_demo.md](docs/pruebas_y_demo.md), fotografías, lecturas y decisiones de mejora. En una sala ocupada, documentar comparación antes/después de ventilar; no asegurar un cambio de estado que no ocurrió.
-9. Subir la carpeta al repositorio privado del equipo siguiendo [github.md](docs/github.md). Incluir fotos y registros **reales** solo después de obtenerlos. Mostrar el repositorio en la demo.
+9. Registrar cada cambio y sus pruebas en este repositorio privado siguiendo [github.md](docs/github.md). Incluir fotos y registros **reales** solo después de obtenerlos. Mostrar el repositorio en la demo.
 
 ## Árbol de archivos
 
