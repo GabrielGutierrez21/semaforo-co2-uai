@@ -28,6 +28,6 @@ La pantalla OLED **DEC #778 es una ampliación pendiente**, no una función impl
 3. Si no aparecen datos, comprobar 3V3/GND y SDA=19, SCL=18. Revisar la serigrafía de la placa, no fiarse del color de cable. Si se usa un ESP32 distinto, cambiar pines en el código.
 4. Agregar cada LED con su resistencia. Subir el firmware del proyecto y comprobar arranque, error y modo prueba.
 5. Agregar pulsador. Si más adelante se dispone de buzzer **activo** y etapa validada, activar `USAR_BUZZER`; el código ya viene con `false`.
-6. Encender la red local del ESP32; el celular se conecta a `Semaforo-CO2-UAI`. Su aviso «sin acceso a Internet» es normal. Abrir **http://192.168.4.1** y verificar que el valor coincide con el monitor serie.
+6. Como verificación opcional, leer la **clave temporal** del monitor serie al arrancar, conectar el celular a `Semaforo-CO2-UAI` (el aviso «sin acceso a Internet» es normal), abrir **http://192.168.4.1** y comparar el valor con el monitor serie. La clave cambia al reiniciar; las luces no dependen del celular.
 
 El sensor debe recibir aire de la sala a través de ranuras; ubicarlo separado del calor del ESP32, lejos de una ventana abierta directamente, de personas soplándole encima y de una fuente de aire que no represente la sala.

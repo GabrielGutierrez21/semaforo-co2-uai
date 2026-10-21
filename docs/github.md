@@ -9,6 +9,6 @@ Proyecto: [GabrielGutierrez21/semaforo-co2-uai](https://github.com/GabrielGutier
 3. Subir fotos del montaje, lecturas reales, video de la demostración y una tabla de problemas, correcciones y resultados cuando existan. No fabricar datos ni presentar el STL conceptual como validado.
 4. Invitar al equipo y al docente desde la configuración de GitHub si necesitan colaborar; revisar antes qué permisos se otorgarán.
 
-Al ser público, no subir contraseñas de redes institucionales, datos personales, códigos de verificación ni mediciones privadas. La clave de ejemplo del punto de acceso local del ESP32 está en el firmware para la demostración; cámbienla antes de usar el dispositivo fuera de un entorno de prueba.
+Al ser público, no subir contraseñas de redes institucionales, datos personales, códigos de verificación ni mediciones privadas. El firmware actualizado genera una clave temporal para el punto de acceso local y la muestra solo por el monitor serie al arrancar. Una versión anterior del historial contenía una clave de demostración fija: no reutilizarla en ningún servicio.
 
 La guía del curso pide código comentado, circuito actualizado y registro de iteraciones. No especifica, en el documento adjunto, una obligación explícita de GitHub; este repositorio organiza esas evidencias y facilita compartirlas.
