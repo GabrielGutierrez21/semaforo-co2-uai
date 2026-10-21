@@ -4,6 +4,8 @@ Prototipo alfa autónomo: un módulo SCD40 o SCD41 mide CO₂ real, el ESP32 enc
 
 > Estado de este paquete: firmware y carcasa generados; lógica comprobada por prueba automática; STL exportados. **No se ha probado el firmware en un ESP32 ni el encaje con las placas físicas.** La evidencia presencial debe producirla el equipo.
 
+**Contingencia Avance #2:** si no se consigue sensor CO₂ a tiempo, ver [plan B de humedad de aula](docs/plan_b_avance_02.md) y el sketch separado `firmware/SemaforoAulaDHT22/`. Esta variante **no mide CO₂**; requiere préstamo de DHT22 #651 y prueba física. No mezclar sus lecturas con el programa SCD40/SCD41.
+
 ## Orden de ejecución
 
 1. Revisar [compras.md](docs/compras.md). Primero preguntar por préstamo de un sensor de CO₂ real en el DEC; su catálogo público no lista ninguno. Si se compra, elegir un **SCD40 o SCD41 montado en breakout I²C** y verificar chip, conectores y entrega; nunca el chip SMD suelto. MH-Z19C/E o STCC4 también miden CO₂, pero **requieren adaptar código y/o conexión antes de usarlos**. El MQ-7 del DEC mide CO, no CO₂.
