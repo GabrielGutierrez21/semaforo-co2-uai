@@ -1,5 +1,7 @@
 # Lista de compra para una unidad
 
+> **Compra vigente para Avance #2:** ver [modelo CCS811 con NodeMCU ESP8266](modelo_ccs811_avance_02.md). Este documento conserva el presupuesto del diseño futuro con SCD40/SCD41 y ESP32. Las piezas y conexiones de abajo no corresponden a las placas fotografiadas el 21-10-2026.
+
 **Comprobar primero qué componentes ya están en el Circuito UAI y en el equipo.** La compra indispensable para convertir la prueba de temperatura en el proyecto declarado es un módulo de CO₂ real. Precios y stock cambian: confirmar antes de pagar, especialmente plazo de entrega a Chile.
 
 El [catálogo público DEC](https://dec.uai.cl/componentes/) consultado el 16-10-2026 no mostró sensores CO₂ al buscarlos; el inventario publicado no garantiza stock. Preguntar presencialmente si hay uno fuera de catálogo. Un módulo genérico SCD40/SCD41 montado se anunciaba en Chile alrededor de $13.500–$16.000 CLP, sujeto a verificar vendedor, autenticidad y entrega. La placa Adafruit 5187 en Mouser rondaba $51.210 CLP antes de otros cargos, pero no es obligatoria.
