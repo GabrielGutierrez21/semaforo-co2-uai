@@ -1,5 +1,17 @@
 # Semáforo de CO₂ para salas UAI
 
+## Estado del primer modelo para Avance #2 (21-10-2026)
+
+El equipo dispone físicamente de **NodeMCU ESP8266, OLED, módulo RGB, pulsador, Arduino Uno y USB**. El DEC confirmó que no quedan sensores disponibles. La implementación inmediata pasa a ser un **indicador de cambios de calidad del aire con CCS811** (TVOC y **eCO₂ estimado**), pantalla OLED, tres LED separados y página local opcional servida por la propia NodeMCU. **El CCS811 no mide CO₂ real; la medición NDIR permanece como etapa futura.**
+
+- [Lista de compra, conexiones y demostración actual](docs/modelo_ccs811_avance_02.md).
+- [Sketch para NodeMCU ESP8266 y CCS811](firmware/SemaforoAireCCS811/SemaforoAireCCS811.ino).
+- Estado: el nuevo programa está preparado **sin compilación ni prueba física todavía**. Confirmar serigrafía y tensión del módulo comprado, soldaduras, controlador OLED y respuesta durante cinco minutos antes de afirmar funcionamiento.
+
+La sección siguiente conserva el proyecto inicial con SCD40/SCD41 y ESP32 como referencia de diseño; sus conexiones, umbrales y carcasa no describen el primer modelo CCS811.
+
+## Diseño original con sensor NDIR (etapa futura)
+
 Prototipo alfa autónomo: un módulo SCD40 o SCD41 mide CO₂ real, el ESP32 enciende una de tres luces y, si se instala una pantalla compatible, se podrán ver los ppm en el propio aparato. Una página servida **por el propio ESP32** permite verificar la transmisión por Wi-Fi local durante la demostración. No necesita Internet, nube, aplicación instalada ni cuenta. La OLED y otras alternativas de sensor se documentan como **mejoras pendientes de integración**; el firmware actual usa SCD40/SCD41 y tres LED individuales.
 
 > Estado de este paquete: firmware y carcasa generados; lógica comprobada por prueba automática; STL exportados. **No se ha probado el firmware en un ESP32 ni el encaje con las placas físicas.** La evidencia presencial debe producirla el equipo.
