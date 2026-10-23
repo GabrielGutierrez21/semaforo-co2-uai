@@ -1,4 +1,4 @@
-# NUEVO — Semáforo de aire: ESP8266 + CCS811 + OLED
+# Semáforo de aire: ESP8266 + CCS811 + OLED
 
 **Versión actual del prototipo:** NodeMCU ESP8266, CCS811, OLED I²C 0,96″ 128×64 SSD1306, LED verde/amarillo/rojo y pulsador. El CCS811 entrega **TVOC y eCO₂ estimado**, no CO₂ medido directamente. El semáforo y las caritas representan cambios de TVOC desde la referencia local. No usa Wi-Fi ni aplicación.
 
