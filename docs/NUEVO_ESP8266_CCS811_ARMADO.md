@@ -14,7 +14,7 @@
 | NodeMCU | Protoboard / pieza | Función |
 |---|---|---|
 | `3V3` | Riel positivo (+), quinto agujero indicado | Alimentación **solo a 3,3 V** para CCS811 compatible |
-| `GND` | Riel negativo (−), con puentes grises hacia a15, a12, a20 y a23 según relato | Tierra común; comprobar continuidad, porque colores y ubicación de puentes no prueban contacto |
+| `GND` | Riel negativo (−). Según tu relato hay puentes grises en a15, a12, a20 y a23 | **Conflicto: a15 comparte columna con D7 y a23 con D6. No alimentar hasta aclararlo y retirar los puentes a GND que caigan en a15/a23.** Los cátodos deben ir a columnas distintas: e12, e20 y e25. |
 | `D2` (GPIO4) | `SDA` CCS811 | Datos I²C |
 | `D1` (GPIO5) | `SCL` CCS811 | Reloj I²C |
 | `D5` (GPIO14) | Cable morado a **a29** → resistencia **c29–c26** → LED **e26–e25** | Verde. Confirmar que **e25** es cátodo y llega a GND |
@@ -23,6 +23,8 @@
 | `D4` (GPIO2) | Pulsador; otro contacto al riel negativo (mencionaste «menos, fila 8») | `INPUT_PULLUP`: libre = HIGH; presionado = LOW |
 
 **CCS811:** además de D1 y D2 necesita alimentación y GND. Confirmar en la **serigrafía de su placa** qué pin es `VIN`/`3V3`, `GND`, `SDA`, `SCL` y `WAKE`. Si el breakout expone `WAKE` y exige bajo para medir, unirlo a GND. No aplicar 5 V ni seguir el dibujo de **SCD40** como pinout del CCS811. El sensor no aparece conectado en la foto, así que ese tramo no está comprobado.
+
+**ALTO, no conectar USB todavía:** los cinco agujeros a–e de la columna **15** tienen continuidad entre sí, igual que los de la **23**. Si el cable gris realmente termina en **a15**, hace corto de D7 a GND; si termina en **a23**, hace corto de D6 a GND. Mover esos grises a los cátodos **e12** y **e20** (por ejemplo a12 y a20) y comprobar que el tercero esté en **e25** (por ejemplo a25). No usar a15, a23 ni a29 como tierra de esos LED. Verificar con multímetro continuidad de cada cátodo al riel negativo y **ausencia** de continuidad de D5/D6/D7 al riel negativo antes de alimentar.
 
 **Protoboard:** a–e de la misma columna numérica están unidos entre sí; el canal central separa a–e de f–j. Los rieles +/− pueden estar cortados a la mitad en ciertas protoboards. Comprobar con multímetro. Para cada LED debe existir una sola cadena `Dx → resistencia → ánodo LED → cátodo LED → GND`. El esquema dibujado indica 330 Ω; medir las resistencias reales (220–330 Ω es adecuado para la primera prueba con 3,3 V). Si falta resistencia o el LED está invertido, corregir antes de alimentar. El color gris no demuestra que un agujero sea tierra: comprobar que llegue al riel negativo.
 
