@@ -1,14 +1,19 @@
-# NUEVO — Prototipo ESP8266 + CCS811 + tres LED + pulsador
+# NUEVO — Semáforo de CO₂ con ESP8266 y SCD40
 
-**Montaje vigente según las conexiones comunicadas el 23-10-2026.**
+**Montaje solicitado:** NodeMCU ESP8266, sensor SCD40 I²C, tres LED individuales con resistencias y pulsador. Sin Wi‑Fi ni frontend. El SCD40 mide **CO₂ real en ppm**; un sensor marcado **CCS811 no sirve con este firmware** y solo produce eCO₂ estimado. Confirmar la etiqueta del sensor físico.
 
-**ALTO antes de conectar USB:** si los cables grises de GND realmente están en **a15** y **a23**, unen a tierra las mismas columnas de **D7** y **D6**. Retirarlos de esas columnas y verificar con multímetro que D5, D6 y D7 no tengan continuidad a GND. Llevar GND a los cátodos en columnas **12, 20 y 25** según el montaje descrito. Consulta la guía antes de encender.
+- [Guía NUEVO_ESP8266_SCD40_ARMADO.md](docs/NUEVO_ESP8266_SCD40_ARMADO.md): conexiones por pin y columna, revisión de posibles cortos, carga y prueba.
+- [Programa NUEVO_ESP8266_SCD40.ino](firmware/NUEVO_ESP8266_SCD40/NUEVO_ESP8266_SCD40.ino): único firmware vigente para la configuración **SCD40**.
 
-- [NUEVO_ESP8266_CCS811_ARMADO.md](docs/NUEVO_ESP8266_CCS811_ARMADO.md): inventario, pin a pin, columnas de protoboard, precauciones y pruebas.
-- [NUEVO_ESP8266_CCS811.ino](firmware/NUEVO_ESP8266_CCS811/NUEVO_ESP8266_CCS811.ino): único programa vigente para NodeMCU ESP8266. Los LED verde, amarillo y rojo usan D5, D6 y D7; el pulsador usa D4; el CCS811 usa D2/SDA y D1/SCL.
+| Señal | Pin ESP8266 |
+|---|---|
+| SCD40 SDA / SCL | D2 / D1 |
+| LED verde / amarillo / rojo | D5 / D6 / D7 |
+| Pulsador | D4 a GND, solo al presionar |
 
-La imagen del esquema recibido rotula **SCD40** y **D3** para el botón. Esos rótulos son anteriores y **no representan este circuito**: el sensor comprado es **CCS811** y el pulsador informado está en **D4**. La OLED y el módulo RGB de fotografías previas **no se conectan** en este montaje.
+**Antes de conectar USB:** si los cables grises de tierra están realmente en **a15 y a23**, comparten columnas con D7 y D6 y producen cortos. Deben ir a las columnas de los cátodos **12, 20 y 25**, según la guía. Revisar con multímetro. La imagen de referencia rotula D3 para el pulsador; la conexión comunicada usa **D4**.
 
-El CCS811 entrega **TVOC y eCO2 estimado**, no medición directa de CO2. Los colores representan una variación relativa de TVOC respecto de la referencia local; no son umbrales de seguridad ni de ventilación.
+**Semáforo:** verde <700 ppm; amarillo 700–1300 ppm; rojo >1300 ppm. Rojo intermitente = sensor ausente/falla. El botón prueba los tres LED después del arranque. Estos valores son umbrales del prototipo.
 
-**Estado:** código y guía actualizados según la descripción y foto del montaje parcial. No se ha compilado en Arduino IDE ni se ha probado con las placas del equipo. Antes de alimentar: verificar la serigrafía y 3,3 V del CCS811, valores de las tres resistencias, polaridad de los LED, rieles de la protoboard y conexiones del pulsador. No imprimir la carcasa antigua; medir el montaje final primero.
+**Estado:** código preparado a partir del montaje descrito y de la API oficial de Sensirion; pendiente de compilar en Arduino IDE y probar con el **SCD40 físico** y la placa conectada. Una foto del chip y su serigrafía permitiría validar la alimentación y el orden exacto de pines.
+
