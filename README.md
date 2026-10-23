@@ -1,18 +1,12 @@
-# NUEVO — Indicador de cambios de aire de aula (ESP8266 + CCS811)
+# NUEVO — Prototipo ESP8266 + CCS811 + tres LED + pulsador
 
-**Montaje vigente para el Avance 2.** La placa principal es la **NodeMCU ESP8266** de las fotografías. El sensor **CCS811 comprado** entrega TVOC (ppb) y un cálculo de **eCO₂ estimado** (ppm). El indicador se ve en la OLED y en el módulo RGB ya disponible: verde = cambio pequeño, amarillo = cambio moderado, rojo = cambio alto respecto de una referencia tomada al iniciar. **No es un medidor de CO₂ real ni un semáforo de seguridad sanitaria o de ventilación.**
+**Montaje vigente según las conexiones comunicadas el 23-10-2026.**
 
-## Abrir solo estos dos archivos
+- [NUEVO_ESP8266_CCS811_ARMADO.md](docs/NUEVO_ESP8266_CCS811_ARMADO.md): inventario, pin a pin, columnas de protoboard, precauciones y pruebas.
+- [NUEVO_ESP8266_CCS811.ino](firmware/NUEVO_ESP8266_CCS811/NUEVO_ESP8266_CCS811.ino): único programa vigente para NodeMCU ESP8266. Los LED verde, amarillo y rojo usan D5, D6 y D7; el pulsador usa D4; el CCS811 usa D2/SDA y D1/SCL.
 
-1. [NUEVO_ESP8266_CCS811_ARMADO.md](docs/NUEVO_ESP8266_CCS811_ARMADO.md): inventario conocido, condiciones que hay que comprobar, conexiones y prueba paso a paso.
-2. [NUEVO_ESP8266_CCS811.ino](firmware/NUEVO_ESP8266_CCS811/NUEVO_ESP8266_CCS811.ino): único programa del montaje vigente; seleccionar **NodeMCU 1.0 (ESP-12E Module)** en Arduino IDE.
+La imagen del esquema recibido rotula **SCD40** y **D3** para el botón. Esos rótulos son anteriores y **no representan este circuito**: el sensor comprado es **CCS811** y el pulsador informado está en **D4**. La OLED y el módulo RGB de fotografías previas **no se conectan** en este montaje.
 
-**Estado real:** documentación y código adaptados a ESP8266 y al módulo RGB fotografiado; no se ha compilado en Arduino IDE ni ensayado con estas placas. Se necesita comprobar la serigrafía/tensión del CCS811, controlador y altura de la OLED, resistencias del RGB y soldar los pines que faltan. La tira de pines comprada no queda conectada por sí sola. Una protoboard facilita repartir 3V3/GND/SDA/SCL; el equipo indicó disponibilidad en DEC, pero no hay fotografía que confirme que ya la retiró.
+El CCS811 entrega **TVOC y eCO2 estimado**, no medición directa de CO2. Los colores representan una variación relativa de TVOC respecto de la referencia local; no son umbrales de seguridad ni de ventilación.
 
-El Arduino Uno y el pulsador fotografiados quedan como repuestos sin conectar en este primer circuito. No se usa Internet, aplicación, buzzer ni tres LED separados. **La antigua carcasa para ESP32 no corresponde a este montaje:** medir las placas ensambladas y diseñar la caja después de que la electrónica funcione.
-
-## Qué mostrar
-
-Encender con anticipación: el CCS811 requiere un período inicial de funcionamiento y unos **20 minutos de estabilización por encendido**. Durante la espera el módulo parpadea en amarillo. Luego se registra la referencia TVOC y se ve la lectura en OLED/Serial. Registrar una prueba continua de cinco minutos y explicar que eCO₂ es estimado. En falla se indica rojo intermitente; nunca se anuncia verde sin datos.
-
-Fuentes: [Adafruit: CCS811 y estabilización](https://learn.adafruit.com/adafruit-ccs811-air-quality-sensor/overview), [conexión CCS811](https://learn.adafruit.com/adafruit-ccs811-air-quality-sensor/arduino-wiring-test), [pines NodeMCU](https://github.com/esp8266/Arduino/blob/master/variants/nodemcu/pins_arduino.h).
+**Estado:** código y guía actualizados según la descripción y foto del montaje parcial. No se ha compilado en Arduino IDE ni se ha probado con las placas del equipo. Antes de alimentar: verificar la serigrafía y 3,3 V del CCS811, valores de las tres resistencias, polaridad de los LED, rieles de la protoboard y conexiones del pulsador. No imprimir la carcasa antigua; medir el montaje final primero.
