@@ -2,6 +2,8 @@
 
 **Montaje vigente según las conexiones comunicadas el 23-10-2026.**
 
+**ALTO antes de conectar USB:** si los cables grises de GND realmente están en **a15** y **a23**, unen a tierra las mismas columnas de **D7** y **D6**. Retirarlos de esas columnas y verificar con multímetro que D5, D6 y D7 no tengan continuidad a GND. Llevar GND a los cátodos en columnas **12, 20 y 25** según el montaje descrito. Consulta la guía antes de encender.
+
 - [NUEVO_ESP8266_CCS811_ARMADO.md](docs/NUEVO_ESP8266_CCS811_ARMADO.md): inventario, pin a pin, columnas de protoboard, precauciones y pruebas.
 - [NUEVO_ESP8266_CCS811.ino](firmware/NUEVO_ESP8266_CCS811/NUEVO_ESP8266_CCS811.ino): único programa vigente para NodeMCU ESP8266. Los LED verde, amarillo y rojo usan D5, D6 y D7; el pulsador usa D4; el CCS811 usa D2/SDA y D1/SCL.
 
