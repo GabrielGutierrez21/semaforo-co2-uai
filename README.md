@@ -1,19 +1,21 @@
-# NUEVO — Semáforo de CO₂ con ESP8266 y SCD40
+# NUEVO — Semáforo de aire: ESP8266 + CCS811 + OLED
 
-**Montaje solicitado:** NodeMCU ESP8266, sensor SCD40 I²C, tres LED individuales con resistencias y pulsador. Sin Wi‑Fi ni frontend. El SCD40 mide **CO₂ real en ppm**; un sensor marcado **CCS811 no sirve con este firmware** y solo produce eCO₂ estimado. Confirmar la etiqueta del sensor físico.
+**Versión actual del prototipo:** NodeMCU ESP8266, CCS811, OLED I²C 0,96″ 128×64 SSD1306, LED verde/amarillo/rojo y pulsador. El CCS811 entrega **TVOC y eCO₂ estimado**, no CO₂ medido directamente. El semáforo y las caritas representan cambios de TVOC desde la referencia local. No usa Wi-Fi ni aplicación.
 
-- [Guía NUEVO_ESP8266_SCD40_ARMADO.md](docs/NUEVO_ESP8266_SCD40_ARMADO.md): conexiones por pin y columna, revisión de posibles cortos, carga y prueba.
-- [Programa NUEVO_ESP8266_SCD40.ino](firmware/NUEVO_ESP8266_SCD40/NUEVO_ESP8266_SCD40.ino): único firmware vigente para la configuración **SCD40**.
+- **[Código NUEVO con OLED](firmware/NUEVO_ESP8266_CCS811_OLED/NUEVO_ESP8266_CCS811_OLED.ino)**: versión que deben cargar para este montaje.
+- **[Guía NUEVA de conexiones y prueba](docs/NUEVO_ESP8266_CCS811_OLED_ARMADO.md)**: cableado, bibliotecas y significado de la pantalla.
 
-| Señal | Pin ESP8266 |
+| Señal | ESP8266 |
 |---|---|
-| SCD40 SDA / SCL | D2 / D1 |
-| LED verde / amarillo / rojo | D5 / D6 / D7 |
+| CCS811 SDA y OLED SDA | D2 |
+| CCS811 SCL y OLED SCL | D1 |
+| CCS811 WAKE | GND |
+| CCS811 GND y OLED GND | GND |
+| CCS811 y OLED alimentación | 3V3, si ambos módulos aceptan 3,3 V |
+| LED verde, amarillo, rojo | D5, D6, D7 (cada uno con resistencia) |
 | Pulsador | D4 a GND, solo al presionar |
 
-**Antes de conectar USB:** si los cables grises de tierra están realmente en **a15 y a23**, comparten columnas con D7 y D6 y producen cortos. Deben ir a las columnas de los cátodos **12, 20 y 25**, según la guía. Revisar con multímetro. La imagen de referencia rotula D3 para el pulsador; la conexión comunicada usa **D4**.
+**Antes de conectar USB:** comprobar que ningún cable de GND esté en a15 ni a23, filas usadas por D7/D6. La pantalla supone controlador SSD1306 y resolución 128×64; confirmarlo en el módulo. El tiempo de espera está en **1 minuto para prueba rápida** y debe volver a 20 minutos si se desean lecturas más estables. Sensor nuevo: el fabricante recomienda alrededor de 48 horas de uso inicial. El código aún no se ha compilado ni probado físicamente con esta OLED concreta.
 
-**Semáforo:** verde <700 ppm; amarillo 700–1300 ppm; rojo >1300 ppm. Rojo intermitente = sensor ausente/falla. El botón prueba los tres LED después del arranque. Estos valores son umbrales del prototipo.
-
-**Estado:** código preparado a partir del montaje descrito y de la API oficial de Sensirion; pendiente de compilar en Arduino IDE y probar con el **SCD40 físico** y la placa conectada. Una foto del chip y su serigrafía permitiría validar la alimentación y el orden exacto de pines.
+La documentación y firmware SCD40 que puedan aparecer en el historial fueron una alternativa anterior; **no cargarlos con el CCS811**.
 
