@@ -1,4 +1,4 @@
-# Semáforo ambiental de aula
+# Semáforo ambiental
 
 Prototipo autónomo de señal visible para cambios en la calidad del aire de una sala. Un **ESP8266** lee un **CCS811**, controla tres LED y muestra datos y caritas en una **OLED de 0,96″**. Funciona localmente, sin Internet ni aplicación. El equipo reportó el circuito de sensor y LED funcional.
 
@@ -23,5 +23,3 @@ El montaje electrónico y el programa se presentan con la evolución del prototi
 
 - Firmware con **Adafruit CCS811**, **Adafruit SSD1306**, **Adafruit GFX** y el núcleo **ESP8266 Arduino**.
 - Bibliotecas oficiales: [CCS811](https://github.com/adafruit/Adafruit_CCS811), [SSD1306](https://github.com/adafruit/Adafruit_SSD1306), [GFX](https://github.com/adafruit/Adafruit-GFX-Library).
-- Este material fue organizado y el código/modelo 3D se apoyaron en asistencia de IA; el equipo debe validar físicamente el montaje y sus mediciones.
-
