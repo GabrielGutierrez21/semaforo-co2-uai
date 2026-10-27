@@ -1,4 +1,9 @@
 # Semáforo ambiental
+Gabriel Gutierrez
+Hai Hu 
+Bastian Cabrera
+Lionel Bravo
+Samuel Acevedo
 
 Prototipo autónomo de señal visible para cambios en la calidad del aire de una sala. Un **ESP8266** lee un **CCS811**, controla tres LED y muestra datos y caritas en una **OLED de 0,96″**. Funciona localmente, sin Internet ni aplicación. El equipo reportó el circuito de sensor y LED funcional.
 
