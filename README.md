@@ -1,4 +1,4 @@
-# Semáforo ambiental
+# Semáforo ambiental (TVOC)
 Gabriel Gutierrez
 Hai Hu 
 Bastian Cabrera
