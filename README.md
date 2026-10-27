@@ -28,3 +28,4 @@ El montaje electrónico y el programa se presentan con la evolución del prototi
 
 - Firmware con **Adafruit CCS811**, **Adafruit SSD1306**, **Adafruit GFX** y el núcleo **ESP8266 Arduino**.
 - Bibliotecas oficiales: [CCS811](https://github.com/adafruit/Adafruit_CCS811), [SSD1306](https://github.com/adafruit/Adafruit_SSD1306), [GFX](https://github.com/adafruit/Adafruit-GFX-Library).
+- asistencia de chatgpt
