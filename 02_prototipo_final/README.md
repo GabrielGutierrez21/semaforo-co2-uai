@@ -17,6 +17,3 @@ La pantalla presenta TVOC en ppb, eCO₂ **estimado** en ppm, estado y una carit
 1. Instalar soporte **ESP8266 Boards** y bibliotecas **Adafruit CCS811**, **Adafruit SSD1306**, **Adafruit GFX** y sus dependencias en Arduino IDE.
 2. Abrir y cargar [NUEVO_ESP8266_CCS811_OLED.ino](NUEVO_ESP8266_CCS811_OLED.ino) seleccionando **NodeMCU 1.0 (ESP-12E Module)**.
 3. Verificar la lectura, estado y carita en la OLED; el monitor serie usa 115200 baudios.
-4. La espera del programa está en **1 minuto para la demo** y luego toma 30 lecturas para referencia. Para mayor estabilidad, cambiar `CALENTAMIENTO_MS` a `20UL * 60UL * 1000UL` y encender con anticipación.
-
-**Validación del equipo:** el equipo informó que el circuito CCS811 + LED quedó funcional. Adjuntar en esta carpeta fotografías o video reales de la versión con OLED después de probarla; no se atribuyen pruebas no realizadas.
