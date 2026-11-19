@@ -1,31 +1,37 @@
-# Semáforo ambiental (TVOC)
-Gabriel Gutierrez
-Hai Hu 
-Bastian Cabrera
-Lionel Bravo
-Samuel Acevedo
+# Semáforo ambiental para una sala
 
-Prototipo autónomo de señal visible para cambios en la calidad del aire de una sala. Un **ESP8266** lee un **CCS811**, controla tres LED y muestra datos y caritas en una **OLED de 0,96″**. Funciona localmente, sin Internet ni aplicación. El equipo reportó el circuito de sensor y LED funcional.
+Prototipo local con **NodeMCU ESP8266**, sensor **CCS811**, tres LED, pulsador y pantalla **OLED I²C 128 × 64**. Muestra TVOC (ppb), eCO₂ **estimado** (ppm) y la variación de TVOC respecto de una referencia inicial. El CCS811 **no mide la concentración real de CO₂**, por lo que el equipo no debe presentarlo como medidor de CO₂ ni usar eCO₂ para certificar ventilación.
 
-**Alcance medido:** TVOC en ppb y eCO₂ **estimado** en ppm. El CCS811 no mide CO₂ real. Las caritas y los LED comunican cambios de TVOC respecto de una referencia tomada al encender; son umbrales demostrativos del prototipo.
+Equipo: Gabriel Gutiérrez, Hai Hu, Bastián Cabrera, Lionel Bravo y Samuel Acevedo.
 
-## Recorrido del proyecto
+## Estado al 19 de noviembre de 2026
 
-| Carpeta | Contenido |
+El firmware local y la carcasa conceptual están disponibles. Se conserva una fotografía del montaje de LED en protoboard y otra de componentes. **La web, la persistencia de datos, el gemelo 3D en Fusion 360, los planos y las mediciones de validación todavía no están implementados o documentados**. La [pauta EV3](docs/ev3_estado.md) distingue los entregables presentes de los pendientes. No se simulan resultados ni se afirma que una pantalla conceptual sea una prueba de funcionamiento.
+
+## Rutas del repositorio
+
+| Carpeta o archivo | Contenido |
 |---|---|
-| [01 · Primer prototipo](01_primer_prototipo/) | ESP8266, CCS811, tres LED y botón; código y descripción del funcionamiento. |
-| [02 · Prototipo final](02_prototipo_final/) | Código vigente con OLED y caritas; conexiones, bibliotecas y uso. |
-| [03 · Modelado 3D](03_modelado_3d/) | Carcasa paramétrica, base y tapa en STL; medidas y proceso de ajuste. |
-| [04 · Entregable 2](04_entregable_2/) | Mapa de evidencias, registro de pruebas y guion de demostración. |
+| [`firmware/SemaforoAmbiental/`](firmware/SemaforoAmbiental/) | Programa vigente ESP8266 + CCS811 + OLED numérica + LED + botón. |
+| [`firmware/historico/`](firmware/historico/) | Primera versión sin OLED, conservada para mostrar la iteración. No cargar en la demo EV3. |
+| [`hardware/`](hardware/) | Conexiones, lista de materiales, diagrama y fotografías disponibles. |
+| [`diseno-3d/`](diseno-3d/) | Fuente OpenSCAD y STL de base y tapa, con medidas y limitaciones. |
+| [`testing/`](testing/) | Protocolo reproducible y criterios de éxito. No contiene resultados inventados. |
+| [`docs/`](docs/) | Estado frente a EV3 y registro del avance anterior. |
+| [`FUENTES.md`](FUENTES.md) | Librerías, referencias, código externo y asistencia de IA. |
 
-**Código que deben cargar:** [NUEVO_ESP8266_CCS811_OLED.ino](02_prototipo_final/NUEVO_ESP8266_CCS811_OLED.ino). El primer prototipo queda disponible para mostrar la evolución. En la versión actual, SDA de sensor y OLED comparten D2; SCL comparte D1; LED verde/amarillo/rojo usan D5/D6/D7; botón D4; WAKE del CCS811 a GND.
+## Montaje y ejecución
 
-## Estado del Entregable 2
+1. Reunir los componentes de [`hardware/BOM.csv`](hardware/BOM.csv) y cablear según [`hardware/conexiones.md`](hardware/conexiones.md) y [`hardware/esquematico.pdf`](hardware/esquematico.pdf). Alimentar los módulos con **3,3 V**, verificar GND común y el voltaje admitido por el breakout CCS811 adquirido.
+2. En Arduino IDE 2.x instalar el núcleo [ESP8266 Arduino](https://github.com/esp8266/Arduino) y las bibliotecas detalladas en [`FUENTES.md`](FUENTES.md). Seleccionar **NodeMCU 1.0 (ESP-12E Module)** y el puerto serie correspondiente.
+3. Abrir [`firmware/SemaforoAmbiental/SemaforoAmbiental.ino`](firmware/SemaforoAmbiental/SemaforoAmbiental.ino), compilar y cargar. Soltar el botón conectado a D4 durante el reinicio, pues ese pin influye en el arranque.
+4. Abrir Monitor Serie a **115200 baudios**. La OLED muestra lecturas y estado; los LED marcan cambio relativo de TVOC. El botón recorre los LED **solo como prueba eléctrica** mientras se mantiene presionado.
+5. Dejar el CCS811 en funcionamiento **20 minutos** antes de interpretar las variaciones y esperar que el equipo capture sus **30 muestras de referencia**. En la primera puesta en uso, seguir además el acondicionamiento inicial indicado por el fabricante. Registrar la prueba según [`testing/protocolo.md`](testing/protocolo.md).
 
-El montaje electrónico y el programa se presentan con la evolución del prototipo y un modelo 3D editable. La carpeta de Entregable 2 indica las evidencias observables y deja espacios para incorporar fotografías, video y resultados medidos por el equipo. La carcasa 3D es un diseño para ajustar a las dimensiones del montaje físico antes de imprimir.
+La pantalla **no dibuja caritas** en el programa vigente. El dispositivo funciona sin internet. Para EV3, una futura **web local servida por el ESP8266**, accesible desde su punto de acceso Wi-Fi y con almacenamiento persistente, sería el siguiente desarrollo; esta versión aún no contiene esa función.
 
-### Bibliotecas y fuentes
+## Alcance técnico
 
-- Firmware con **Adafruit CCS811**, **Adafruit SSD1306**, **Adafruit GFX** y el núcleo **ESP8266 Arduino**.
-- Bibliotecas oficiales: [CCS811](https://github.com/adafruit/Adafruit_CCS811), [SSD1306](https://github.com/adafruit/Adafruit_SSD1306), [GFX](https://github.com/adafruit/Adafruit-GFX-Library).
-- asistencia de chatgpt
+Verde: TVOC menor que referencia + 50 ppb; amarillo: +50 a +149 ppb; rojo: +150 ppb o más. Estos umbrales son **reglas exploratorias del prototipo**, no límites sanitarios ni equivalentes a ppm de CO₂. El programa avisa calentamiento, error y ausencia de sensor por separado. La frecuencia de visualización es 0,5 s; la de reporte serie, 1 s; las lecturas nuevas dependen de `ccs.available()`.
+
+El modelo físico publicado mide nominalmente **100 × 80 × 33,5 mm**, compuesto por base de 31 mm y tapa de 2,5 mm; antes de imprimir hay que contrastar el tamaño real de la electrónica y sus conectores. Las imágenes de producto generadas previamente son conceptuales y no sustituyen fotos, planos ni un archivo `.f3d`.
