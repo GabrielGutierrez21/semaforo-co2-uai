@@ -1,0 +1,13 @@
+componente,cantidad,especificacion,procedencia_reportada,precio_referencial_unitario_CLP,fuente_precio,observacion
+NodeMCU ESP8266,1,Placa ESP-12E con pines D1 a D7,material del equipo,4500,https://afel.cl/products/nodemcu-v3-lolin,Referencia de placa comparable no boleta
+CCS811,1,Modulo I2C compatible con 3V3 y WAKE a GND,compra del equipo,18000,https://afel.cl/products/sensor-monoxido-de-carbono-co-cjmcu-811,Precio de CJMCU-811 comparable comprobar breakout exacto
+OLED I2C 0.96 pulgadas,1,128x64 compatible SSD1306 y 3V3,material del equipo,4500,https://afel.cl/products/pantalla-lcd-oled-azul-y-amarillo-0-96,Precio de pantalla comparable no boleta
+LED verde,1,LED discreto con resistencia serie,material del equipo,70,https://afel.cl/products/diodo-led-5mm-ultrabrillante-verde,Precio de LED verde comparable
+LED amarillo,1,LED discreto con resistencia serie,material del equipo,,,Sin precio comprobado
+LED rojo,1,LED discreto con resistencia serie,material del equipo,,,Sin precio comprobado
+Resistencias para LED,3,330 ohm nominal 1/4 W verificar bandas o multimetro,material del equipo,,,Valor real y precio individual no verificados
+Pulsador,1,Normalmente abierto entre D4 y GND,material del equipo,,,Sin precio comprobado
+Protoboard,1,Referencia 400 puntos aproximadamente 84x55 mm,material del equipo,1500,https://afel.cl/products/mini-protoboard-400-puntos,Precio de modelo comparable no boleta
+Cables Dupont,1,Pack adquirido de 120 cables mixtos de 10 cm,compra del equipo,,,Precio del pack adquirido no informado
+Cabezales 2.54 mm,1,Tira adquirida de 40 pines,compra del equipo,,,Se usan los pines necesarios si los modulos no vienen soldados
+Cable USB,1,USB A a micro USB para NodeMCU,material del equipo,,,Confirmar alimentacion estable

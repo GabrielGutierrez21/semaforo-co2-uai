@@ -1,0 +1,18 @@
+graph circuito {
+  graph [fontname="DejaVu Sans", rankdir=LR, splines=polyline, nodesep=.55, ranksep=.95, bgcolor="white", label="Diagrama de conexiones - ESP8266 / CCS811 / OLED", labelloc=t, fontsize=20];
+  node [shape=box, style="rounded", fontname="DejaVu Sans", fontsize=13, margin="0.13,0.10"];
+  edge [fontname="DejaVu Sans", fontsize=11, color="#385D5A"];
+  esp [label="NodeMCU ESP8266\nD1 SCL · D2 SDA\nD4 botón · D5 verde\nD6 amarillo · D7 rojo\n3V3 · GND · USB", fillcolor="#DDECE9", style="rounded,filled"];
+  ccs [label="CCS811\nSCL · SDA\nVCC 3V3 · GND\nWAKE → GND"];
+  oled [label="OLED 128×64\nSCL · SDA\nVCC 3V3 · GND"];
+  boton [label="Pulsador\nD4 ─ contacto ─ GND"];
+  verde [label="330 Ω ─ LED verde ─ GND", color="#359966"];
+  amarillo [label="330 Ω ─ LED amarillo ─ GND", color="#BA912C"];
+  rojo [label="330 Ω ─ LED rojo ─ GND", color="#B85852"];
+  esp -- ccs [label="D1→SCL  D2→SDA\n3V3→VCC  GND→GND/WAKE"];
+  esp -- oled [label="D1→SCL  D2→SDA\n3V3→VCC  GND→GND"];
+  esp -- boton [label="D4"];
+  esp -- verde [label="D5"];
+  esp -- amarillo [label="D6"];
+  esp -- rojo [label="D7"];
+}
