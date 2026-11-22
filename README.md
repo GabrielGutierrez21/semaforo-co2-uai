@@ -24,11 +24,12 @@ El ESP8266 guarda un registro CSV en **LittleFS** cada 60 segundos cuando hay le
 |---|---|
 | [`firmware/SemaforoAmbiental/`](firmware/SemaforoAmbiental/) | Código vigente: sensor, LED, OLED, servidor local, historial y página integrada. |
 | [`firmware/historico/`](firmware/historico/) | Firmware del primer prototipo, conservado como iteración. |
+| [`iteraciones/`](iteraciones/) | Recorrido desde el primer prototipo hasta la versión con web local. |
 | [`software/`](software/) | Arquitectura, API y funcionamiento de la web local. |
 | [`hardware/`](hardware/) | BOM, conexiones, esquema y fotografías disponibles. |
 | [`diseno-3d/`](diseno-3d/) | Fuente paramétrica y STL de la carcasa; misma carpeta para añadir los archivos Fusion y planos. |
 | [`testing/`](testing/) | Protocolo de comprobación con datos obtenidos de la placa. |
-| [`docs/`](docs/) | Evolución del proyecto y pauta para la presentación EV3. |
+| [`docs/`](docs/) | Documentos de avance y pauta para la presentación EV3. |
 | [`FUENTES.md`](FUENTES.md) | Librerías, documentación técnica y atribuciones. |
 
 ## Montaje
