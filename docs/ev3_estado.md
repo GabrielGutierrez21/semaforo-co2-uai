@@ -2,7 +2,7 @@
 
 La evaluación combina **Presentación 3** y **revisión final de GitHub** (50 % cada una), según la indicación del docente. Durante la exposición se puede omitir la navegación por GitHub y la exhibición de planos, pues se revisan aparte. La pauta aportada por el equipo fija una presentación presencial de **8–10 minutos** y **3 minutos de preguntas**, con demostración del prototipo.
 
-## Secuencia sugerida
+## Secuencia
 
 1. Problema concreto de monitorear cambios ambientales en una sala; alcance real del CCS811.
 2. Montaje físico: ESP8266, CCS811, OLED numérica, tres LED y pulsador. Indicar que WAKE va a GND y que sensor y OLED comparten I²C.
