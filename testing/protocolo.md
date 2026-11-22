@@ -17,4 +17,15 @@
 
 **Análisis solicitado:** calcular número de muestras esperadas y recibidas en la ventana de 5 min, máximo tiempo sin dato, latencia entre evento y cambio de estado, media y rango TVOC en referencia y exposición; registrar al menos un fallo real, causa comprobada y modificación. Si no hay instrumento de referencia de CO₂, no informar precisión de CO₂ ni afirmar que se validó ventilación.
 
-**Integridad de datos:** cualquier captura usada en la presentación debe corresponder a estas pruebas reales. Al implementar la web local, repetir los pasos 2–5 con navegador conectado y verificar que el histórico persiste tras reiniciar el ESP8266.
+## Verificación de web e historial
+
+| Paso | Acción | Evidencia | Criterio |
+|---|---|---|---|
+| 7 | Conectar el celular a `Aire-UAI` y abrir `http://192.168.4.1` sin Internet. | Captura de red, web y OLED en el mismo instante. | TVOC/eCO₂ coinciden con OLED o Serie y cambian al recibir nuevas lecturas; sin sensor aparece `--`. |
+| 8 | Tras dos registros separados al menos 60 s, descargar `/historico.csv`. | CSV original y captura de la gráfica. | CSV contiene sesión, segundos, TVOC, eCO₂, referencia y estado; gráfica usa esas filas. |
+| 9 | Reiniciar el ESP8266, volver a la web y descargar CSV. | CSV antes/después y log del arranque. | Persisten filas anteriores y aumenta el número de sesión. |
+| 10 | Desconectar temporalmente el celular de la red local. | Captura del aviso en la interfaz. | La web muestra `Sin conexión` y deja de enseñar un valor viejo como vigente. |
+
+**Análisis:** comparar al menos tres pares de valores Serie/OLED/web, medir el intervalo real entre registros, contar filas antes y después del reinicio y explicar discrepancias. Si LittleFS no monta, registrar el error y verificar la partición de flash antes de afirmar persistencia.
+
+**Integridad:** cualquier dato, gráfico o captura presentado debe provenir del circuito real. No completar CSV con números simulados.
