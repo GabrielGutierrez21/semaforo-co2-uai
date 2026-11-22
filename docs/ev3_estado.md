@@ -1,28 +1,22 @@
-# EV3: estado y trabajo pendiente
+# Guía para la presentación EV3
 
-Pauta oficial aportada por el equipo: **Avance #3, Prototipo IoT Completo**, TEI201 DEC UAI. Fecha indicada: **23 de noviembre de 2026**. Presentación presencial de 8–10 min y 3 min de preguntas. El docente aclaró que **Presentación 3 y Revisión Final de GitHub valen 50 % cada una**; el repositorio y planos se pueden omitir durante la exposición porque se revisarán aparte. Esto no elimina la exigencia de entregarlos.
+La evaluación combina **Presentación 3** y **revisión final de GitHub** (50 % cada una), según la indicación del docente. Durante la exposición se puede omitir la navegación por GitHub y la exhibición de planos, pues se revisan aparte. La pauta aportada por el equipo fija una presentación presencial de **8–10 minutos** y **3 minutos de preguntas**, con demostración del prototipo.
 
-| Criterio | Evidencia disponible en este repo | Falta para EV3 |
-|---|---|---|
-| Captura y señal | [`firmware/SemaforoAmbiental/`](../firmware/SemaforoAmbiental/), tabla de conexiones | Compilar y probar el código actualizado en la placa; registrar lecturas y una demo continua. |
-| Persistencia y dashboard | Ningún servicio ni dashboard implementado | Web local en el ESP8266 con lectura real, histórico persistente y visualización usable; luego prueba en vivo. |
-| Hardware | [`BOM.csv`](../hardware/BOM.csv), [diagrama](../hardware/esquematico.pdf) y dos fotos de etapas previas | Comprobar resistencia y módulos reales, completar costos documentados y fotografiar ensamblado final desde al menos tres ángulos. |
-| Reparación y 3D | [OpenSCAD + dos STL](../diseno-3d/) | Medir montaje, ajustar encaje, modelar componentes y ensamble en Fusion 360, entregar `.f3d`/`.f3z`, planos PDF y renders. |
-| Pruebas | [Protocolo con criterios](../testing/protocolo.md) | Logs y CSV reales, gráficas, análisis cuantitativo, fallo y solución, conexión explícita con el problema. |
-| Integridad | [`FUENTES.md`](../FUENTES.md) | Añadir fuentes de librerías/código de la web cuando se implemente. |
+## Secuencia sugerida
 
-## Arquitectura de la siguiente etapa
+1. Problema concreto de monitorear cambios ambientales en una sala; alcance real del CCS811.
+2. Montaje físico: ESP8266, CCS811, OLED numérica, tres LED y pulsador. Indicar que WAKE va a GND y que sensor y OLED comparten I²C.
+3. Abrir la web desde un celular conectado a `Aire-UAI`, en `http://192.168.4.1`. Mostrar TVOC y eCO₂ estimado, carita y LED correspondientes, y abrir ambas tarjetas de explicación.
+4. Mostrar historial CSV que persiste tras reiniciar la placa. Señalar sesiones y segundos desde arranque, sin llamarlos hora real.
+5. Explicar el protocolo, resultados reales que haya documentado el equipo y sus límites. No presentar eCO₂ como CO₂ real ni los colores como umbrales sanitarios.
 
-Una web **alojada en el ESP8266** evita contratar servidor, acceso a Internet y app móvil: el microcontrolador crea un punto de acceso Wi-Fi local, sirve el HTML/CSS/JS y expone valores TVOC/eCO₂ por una API local. La persistencia puede implementarse con LittleFS (CSV estructurado) y descarga del histórico. El navegador muestra valores en vivo, umbrales relativos y una gráfica. Esta arquitectura es una **propuesta**, no funcionalidad ya entregada. Primero hay que medir espacio libre de flash y ensayar el guardado para evitar desgaste y pérdida por reinicios.
+Para que la carita ya clasifique durante la demo, encender el sensor con **20 minutos de anticipación** y esperar la referencia de 30 muestras. Si se presenta antes, mostrar honestamente el estado de calentamiento y las lecturas disponibles. Llevar un registro CSV real y capturas de la interfaz como respaldo por si el celular se desconecta.
 
-La web debe nombrar **eCO₂ estimado**, nunca `CO₂ real`, y mostrar que las luces representan **cambios relativos de TVOC**. Un resultado sobre ventilación requeriría un sensor NDIR de CO₂ o una validación externa adecuada.
+## Documentos del repositorio
 
-## Orden de trabajo
-
-1. Confirmar cableado, cargar el firmware numérico sin caritas y ejecutar el protocolo con fotos/logs reales.
-2. Implementar la web local y persistencia en la misma placa ESP8266; validar navegador sin internet, reinicio e histórico.
-3. Medir físicamente los módulos, actualizar BOM/costos, montar de forma segura y tomar tres fotos del ensamble.
-4. Completar modelo Fusion 360 con volúmenes internos, plano PDF y renders; subir archivos nativos que abran correctamente.
-5. Agregar resultados reales y preparar la presentación con problema, demo, dashboard y validación, sin gastar tiempo mostrando el repositorio.
-
-**Riesgo principal:** con el CCS811 no se puede demostrar medición directa de CO₂ de una sala. La defensa debe describir honestamente la observación de VOC/eCO₂ como primera aproximación de calidad ambiental.
+- [Montaje y esquema](../hardware/README.md).
+- [Firmware y uso](../firmware/SemaforoAmbiental/README.md).
+- [Arquitectura web y API](../software/README.md).
+- [Modelo físico](../diseno-3d/README.md).
+- [Protocolo de pruebas](../testing/protocolo.md).
+- [Fuentes y atribución](../FUENTES.md).
