@@ -1,6 +1,6 @@
 # Fuentes y uso de herramientas de IA
 
-Declaración del código y de la documentación disponibles en este repositorio al **19 de noviembre de 2026**. El archivo es parte de la entrega EV3 y debe actualizarse cuando se añadan la web, nuevas librerías, archivos Fusion o mediciones.
+Declaración del código y la documentación del proyecto. Actualizado el **22 de noviembre de 2026** con servidor web local e historial LittleFS. Añadir aquí cualquier fuente externa que se incorpore posteriormente.
 
 ## Librerías y dependencias del firmware vigente
 
@@ -14,7 +14,7 @@ Las versiones siguientes son **versiones de referencia para reproducir la compil
 | Adafruit GFX Library | 1.12.6 | Texto y gráficos de la pantalla | https://github.com/adafruit/Adafruit-GFX-Library/releases |
 | Adafruit BusIO | 1.17.4 | Dependencia de bibliotecas Adafruit para I²C | https://github.com/adafruit/Adafruit_BusIO/releases |
 
-`Arduino.h` y `Wire.h` provienen del núcleo ESP8266. No se ha incluido código de terceros copiado literalmente en el repositorio según el trabajo disponible para esta revisión. Si el equipo incorpora fragmentos externos al hacer la web, debe agregar aquí su URL, función y adaptación antes de la entrega.
+`Arduino.h` y `Wire.h` provienen del núcleo ESP8266. No se ha incluido código de terceros copiado literalmente en el repositorio según el trabajo disponible para esta revisión. La web local está escrita para este proyecto y no carga bibliotecas externas ni servicios de terceros.
 
 ## Referencias técnicas y pauta
 
@@ -29,3 +29,12 @@ Se empleó **ChatGPT de OpenAI** en 2026 para proponer y revisar el firmware ESP
 Para explicar y defender lo generado, el equipo debe conocer `estado()` (clasifica calentamiento, referencia y diferencia de TVOC), `leerSensor()` (obtiene lecturas y calcula la referencia de 30 muestras), `senal()` (activa LED o prueba del pulsador), `actualizarPantalla()` (muestra números y estado) y `reportar()` (salida serie). **No se ha verificado físicamente en esta revisión** el programa modificado ni la compatibilidad exacta del breakout que posee el equipo; deben compilar, cargar y registrar una prueba real antes de presentarlo.
 
 También se usaron imágenes conceptuales con IA en una presentación anterior. No son fotos del prototipo ni renders de un gemelo Fusion 360, y por esa razón no se incluyen como evidencia física de EV3.
+
+## Fuentes de la web local y textos informativos
+
+- [ESP8266 Arduino Core, documentación de LittleFS](https://arduino-esp8266.readthedocs.io/en/stable/filesystem.html): montaje, escritura y rotación de archivos locales.
+- [ESP8266WebServer, API del núcleo ESP8266](https://github.com/esp8266/Arduino/blob/master/libraries/ESP8266WebServer/src/ESP8266WebServer.h): respuesta HTTP y página HTML en flash.
+- [Adafruit CCS811, guía de conexión y uso](https://learn.adafruit.com/adafruit-ccs811-air-quality-sensor/arduino-wiring-test): salidas TVOC y eCO₂ estimado, acondicionamiento inicial y de cada sesión.
+- [EPA, compuestos orgánicos volátiles en interiores](https://www.epa.gov/indoor-air-quality-iaq/volatile-organic-compounds-impact-indoor-air-quality): variedad de VOC y efectos que dependen del compuesto y de la exposición. Texto resumido y adaptado en las tarjetas de la web.
+
+La interfaz HTML/CSS/JavaScript y las funciones de punto de acceso, API y registro CSV fueron generadas y revisadas con asistencia de ChatGPT para este proyecto. No se copiaron plantillas web externas ni se emplearon datos experimentales sintéticos. Las pruebas físicas y los resultados deben ser aportados por el equipo.

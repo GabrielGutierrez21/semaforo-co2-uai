@@ -1,37 +1,53 @@
-# Semáforo ambiental para una sala
+# Semáforo ambiental · Aire UAI
 
-Prototipo local con **NodeMCU ESP8266**, sensor **CCS811**, tres LED, pulsador y pantalla **OLED I²C 128 × 64**. Muestra TVOC (ppb), eCO₂ **estimado** (ppm) y la variación de TVOC respecto de una referencia inicial. El CCS811 **no mide la concentración real de CO₂**, por lo que el equipo no debe presentarlo como medidor de CO₂ ni usar eCO₂ para certificar ventilación.
+Dispositivo autónomo para observar **cambios relativos de TVOC** en una sala. Un **NodeMCU ESP8266** lee un **CCS811**, enciende tres LED, muestra las lecturas en una OLED y publica una **web local con aspecto de aplicación móvil**. El celular se conecta directamente a la red Wi‑Fi del dispositivo: no se requiere Internet, app instalada ni servidor externo.
 
-Equipo: Gabriel Gutiérrez, Hai Hu, Bastián Cabrera, Lionel Bravo y Samuel Acevedo.
+> El CCS811 informa TVOC y **eCO₂ estimado**, no una medición directa de CO₂. El semáforo usa únicamente la diferencia de TVOC respecto de una referencia tomada tras el calentamiento. Sus colores son orientativos para esta demostración, no límites de salud ni certificados de ventilación.
 
-## Estado al 19 de noviembre de 2026
+## Equipo
 
-El firmware local y la carcasa conceptual están disponibles. Se conserva una fotografía del montaje de LED en protoboard y otra de componentes. **La web, la persistencia de datos, el gemelo 3D en Fusion 360, los planos y las mediciones de validación todavía no están implementados o documentados**. La [pauta EV3](docs/ev3_estado.md) distingue los entregables presentes de los pendientes. No se simulan resultados ni se afirma que una pantalla conceptual sea una prueba de funcionamiento.
+Gabriel Gutiérrez · Hai Hu · Bastián Cabrera · Lionel Bravo · Samuel Acevedo.
 
-## Rutas del repositorio
+## Problema y solución
 
-| Carpeta o archivo | Contenido |
+En salas compartidas es difícil observar cómo cambian los compuestos volátiles durante el uso diario. Este primer prototipo muestra una tendencia local fácil de interpretar mediante LED, OLED y una interfaz de celular con carita feliz, neutra o triste. Cada tarjeta explica qué mide el sensor y el alcance de esa lectura.
+
+## Arquitectura
+
+`CCS811 (I²C) → ESP8266 → LED + OLED + red Wi‑Fi local → navegador del celular`
+
+El ESP8266 guarda un registro CSV en **LittleFS** cada 60 segundos cuando hay lectura válida. La web consulta `/api/estado` cada dos segundos y dibuja los últimos 60 registros. El CSV incluye número de sesión y segundos desde el encendido; **no inventa hora de calendario** porque el prototipo no tiene reloj ni sincronización externa.
+
+## Estructura
+
+| Ruta | Contenido |
 |---|---|
-| [`firmware/SemaforoAmbiental/`](firmware/SemaforoAmbiental/) | Programa vigente ESP8266 + CCS811 + OLED numérica + LED + botón. |
-| [`firmware/historico/`](firmware/historico/) | Primera versión sin OLED, conservada para mostrar la iteración. No cargar en la demo EV3. |
-| [`hardware/`](hardware/) | Conexiones, lista de materiales, diagrama y fotografías disponibles. |
-| [`diseno-3d/`](diseno-3d/) | Fuente OpenSCAD y STL de base y tapa, con medidas y limitaciones. |
-| [`testing/`](testing/) | Protocolo reproducible y criterios de éxito. No contiene resultados inventados. |
-| [`docs/`](docs/) | Estado frente a EV3 y registro del avance anterior. |
-| [`FUENTES.md`](FUENTES.md) | Librerías, referencias, código externo y asistencia de IA. |
+| [`firmware/SemaforoAmbiental/`](firmware/SemaforoAmbiental/) | Código vigente: sensor, LED, OLED, servidor local, historial y página integrada. |
+| [`firmware/historico/`](firmware/historico/) | Firmware del primer prototipo, conservado como iteración. |
+| [`software/`](software/) | Arquitectura, API y funcionamiento de la web local. |
+| [`hardware/`](hardware/) | BOM, conexiones, esquema y fotografías disponibles. |
+| [`diseno-3d/`](diseno-3d/) | Fuente paramétrica y STL de la carcasa; misma carpeta para añadir los archivos Fusion y planos. |
+| [`testing/`](testing/) | Protocolo de comprobación con datos obtenidos de la placa. |
+| [`docs/`](docs/) | Evolución del proyecto y pauta para la presentación EV3. |
+| [`FUENTES.md`](FUENTES.md) | Librerías, documentación técnica y atribuciones. |
 
-## Montaje y ejecución
+## Montaje
 
-1. Reunir los componentes de [`hardware/BOM.csv`](hardware/BOM.csv) y cablear según [`hardware/conexiones.md`](hardware/conexiones.md) y [`hardware/esquematico.pdf`](hardware/esquematico.pdf). Alimentar los módulos con **3,3 V**, verificar GND común y el voltaje admitido por el breakout CCS811 adquirido.
-2. En Arduino IDE 2.x instalar el núcleo [ESP8266 Arduino](https://github.com/esp8266/Arduino) y las bibliotecas detalladas en [`FUENTES.md`](FUENTES.md). Seleccionar **NodeMCU 1.0 (ESP-12E Module)** y el puerto serie correspondiente.
-3. Abrir [`firmware/SemaforoAmbiental/SemaforoAmbiental.ino`](firmware/SemaforoAmbiental/SemaforoAmbiental.ino), compilar y cargar. Soltar el botón conectado a D4 durante el reinicio, pues ese pin influye en el arranque.
-4. Abrir Monitor Serie a **115200 baudios**. La OLED muestra lecturas y estado; los LED marcan cambio relativo de TVOC. El botón recorre los LED **solo como prueba eléctrica** mientras se mantiene presionado.
-5. Dejar el CCS811 en funcionamiento **20 minutos** antes de interpretar las variaciones y esperar que el equipo capture sus **30 muestras de referencia**. En la primera puesta en uso, seguir además el acondicionamiento inicial indicado por el fabricante. Registrar la prueba según [`testing/protocolo.md`](testing/protocolo.md).
+1. Cablear según [hardware/conexiones.md](hardware/conexiones.md): **D1 = SCL**, **D2 = SDA** compartidos por CCS811 y OLED; **D4 = botón a GND**; **D5/D6/D7 = LED verde/amarillo/rojo**, cada uno con resistencia serie y cátodo a GND; **WAKE del CCS811 a GND**. Usar 3,3 V en los módulos compatibles y tierra común.
+2. Instalar el núcleo **ESP8266 Arduino** y las bibliotecas **Adafruit CCS811**, **Adafruit SSD1306**, **Adafruit GFX** y su dependencia **Adafruit BusIO**; véase [FUENTES.md](FUENTES.md).
+3. En Arduino IDE seleccionar **NodeMCU 1.0 (ESP‑12E Module)** y una configuración de flash con espacio para LittleFS. Abrir [firmware/SemaforoAmbiental/SemaforoAmbiental.ino](firmware/SemaforoAmbiental/SemaforoAmbiental.ino) y cargarlo por USB. `WebUI.h` debe permanecer en la misma carpeta. No se necesita cargar archivos web por separado.
+4. Soltar el pulsador D4 durante el reinicio. Abrir Monitor Serie a **115200 baudios** y comprobar que aparecen el CCS811, la OLED y la dirección de la web. Si LittleFS no monta, la pantalla y los LED continúan, pero la web indicará que no se guarda el historial.
 
-La pantalla **no dibuja caritas** en el programa vigente. El dispositivo funciona sin internet. Para EV3, una futura **web local servida por el ESP8266**, accesible desde su punto de acceso Wi-Fi y con almacenamiento persistente, sería el siguiente desarrollo; esta versión aún no contiene esa función.
+## Uso de la aplicación local
 
-## Alcance técnico
+1. Encender el equipo por USB. En el celular, conectarse a **Aire-UAI**, clave **AireUAI2026**. El aviso «Sin Internet» en el teléfono es normal: mantener esa red.
+2. Abrir **http://192.168.4.1** en el navegador. La página se adapta a la pantalla del teléfono. Los valores proceden de la placa y muestran `--` si no hay lectura; nunca usa datos de muestra.
+3. Esperar **20 minutos** de acondicionamiento del CCS811 en cada uso y luego **30 muestras** para establecer la referencia de TVOC. Para la exposición, encender el prototipo con suficiente anticipación. Durante la espera la web muestra los números disponibles y la cuenta restante, sin clasificar el aire.
+4. La carita feliz/neutra/triste y los LED reflejan **bajo / medio / alto cambio relativo de TVOC**. Tocar TVOC o eCO₂ abre su explicación. La pantalla OLED muestra números y estado, sin caritas.
+5. Pulsar D4 para recorrer los LED como prueba eléctrica. Descargar `historico.csv` desde la web para revisar los registros; una rotación mantiene el archivo anterior en `/historico-anterior.csv`.
 
-Verde: TVOC menor que referencia + 50 ppb; amarillo: +50 a +149 ppb; rojo: +150 ppb o más. Estos umbrales son **reglas exploratorias del prototipo**, no límites sanitarios ni equivalentes a ppm de CO₂. El programa avisa calentamiento, error y ausencia de sensor por separado. La frecuencia de visualización es 0,5 s; la de reporte serie, 1 s; las lecturas nuevas dependen de `ccs.available()`.
+**Umbrales exploratorios:** verde por debajo de referencia + 50 ppb; amarillo entre +50 y +149 ppb; rojo desde +150 ppb. La concentración absoluta de TVOC, la salud de las personas y la ventilación real no se pueden determinar mediante estos colores.
 
-El modelo físico publicado mide nominalmente **100 × 80 × 33,5 mm**, compuesto por base de 31 mm y tapa de 2,5 mm; antes de imprimir hay que contrastar el tamaño real de la electrónica y sus conectores. Las imágenes de producto generadas previamente son conceptuales y no sustituyen fotos, planos ni un archivo `.f3d`.
+## Reproducibilidad y evidencias
+
+La [guía de software](software/README.md) describe los endpoints y el registro. El [protocolo](testing/protocolo.md) indica cómo documentar una prueba real con fotos, capturas, CSV y reinicio. El diseño físico se mantiene en [diseno-3d/](diseno-3d/) para continuar allí con los archivos de fabricación. No se incluyen registros experimentales fabricados.
