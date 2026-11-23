@@ -41,7 +41,7 @@ El ESP8266 guarda un registro CSV en **LittleFS** cada 60 segundos cuando hay le
 
 ## Uso de la aplicación local
 
-1. Encender el equipo con la alimentación USB usada para las pruebas. La carcasa actual aloja **2 pilas AA**; consultar [la verificación eléctrica](hardware/conexiones.md#alimentacion-con-dos-pilas-aa) antes de usarlas para alimentar la placa. En el celular, conectarse a **Aire-UAI**, clave **AireUAI2026**. El aviso «Sin Internet» en el teléfono es normal: mantener esa red.
+1. Alimentar el equipo por USB para programarlo o mediante el portapilas **2 × AA**, cuyo positivo está conectado a `3V3` y negativo a `GND` en el montaje reportado. Usar una fuente a la vez y [medir la tensión bajo carga](hardware/conexiones.md#alimentacion-con-dos-pilas-aa) para documentar la autonomía. En el celular, conectarse a **Aire-UAI** con la clave configurada en el dispositivo. El aviso «Sin Internet» en el teléfono es normal: mantener esa red.
 2. Abrir **http://192.168.4.1** en el navegador. La página se adapta a la pantalla del teléfono. Los valores proceden de la placa y muestran `--` si no hay lectura; nunca usa datos de muestra.
 3. Esperar **20 minutos** de acondicionamiento del CCS811 en cada uso y luego **30 muestras** para establecer la referencia de TVOC. Para la exposición, encender el prototipo con suficiente anticipación. Durante la espera la web muestra los números disponibles y la cuenta restante, sin clasificar el aire.
 4. La carita feliz/neutra/triste y los LED reflejan **bajo / medio / alto cambio relativo de TVOC**. Tocar TVOC o eCO₂ abre su explicación. La pantalla OLED muestra números y estado, sin caritas.
