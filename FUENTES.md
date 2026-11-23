@@ -21,7 +21,6 @@ Las versiones siguientes son **versiones de referencia para reproducir la compil
 - [Guía Adafruit CCS811](https://learn.adafruit.com/adafruit-ccs811-air-quality-sensor/overview): distingue TVOC y eCO₂ equivalente, y recoge el acondicionamiento inicial y el periodo de 20 minutos tras encender.
 - [Hoja de datos CCS811 alojada por Adafruit](https://cdn-shop.adafruit.com/product-files/3566/3566_datasheet.pdf): funcionamiento del sensor y condición de sus salidas estimadas.
 - [Espressif, hoja de datos ESP8266EX](https://documentation.espressif.com/0a-esp8266ex_datasheet_en.html) y [recomendaciones de alimentación](https://docs.espressif.com/projects/esp-techpedia/en/latest/esp-friends/get-started/try-firmware/try-firmware-hardware/esp8266.html): voltaje del chip y margen de corriente de la fuente para Wi‑Fi.
-- [Adafruit PowerBoost 500 Basic](https://learn.adafruit.com/adafruit-powerboost/overview): ejemplo técnico de elevador de 2 pilas AA a una salida USB de 5 V; no implica que ese módulo específico esté instalado en el prototipo.
 - Documento de evaluación **Avance #3: Prototipo IoT Completo**, TEI201 DEC UAI, aportado por el equipo en esta conversación (19 de noviembre de 2026).
 
 El archivo [`diseno-3d/SEMAFORO_AMBIENTAL.zip`](diseno-3d/SEMAFORO_AMBIENTAL.zip) fue aportado por el equipo. Los STEP, STL, PDF y script Fusion de [`diseno-3d/`](diseno-3d/) son su contenido extraído y organizado; la carcasa anterior está conservada en [`iteraciones/diseno-3d-inicial/`](iteraciones/diseno-3d-inicial/).
