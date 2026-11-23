@@ -1,10 +1,10 @@
 # Hardware
 
-Los archivos de esta carpeta describen el montaje con **una protoboard** y alimentación USB del NodeMCU ESP8266:
+Los archivos de esta carpeta describen el montaje con **una protoboard**. El esquema representa la alimentación USB comprobable; la carcasa actual incorpora un compartimento para **2 pilas AA**, cuya conexión eléctrica se documenta con sus condiciones en [`conexiones.md`](conexiones.md):
 
-- [`conexiones.md`](conexiones.md): tabla de pines, alimentación y procedimiento de comprobación.
+- [`conexiones.md`](conexiones.md): tabla de pines, alimentación, precauciones para 2 AA y procedimiento de comprobación.
 - [`esquematico.pdf`](esquematico.pdf): diagrama funcional de las interconexiones; su fuente editable es [`esquematico.dot`](esquematico.dot).
-- [`BOM.csv`](BOM.csv): componentes y referencias de costo. No se ha recibido una boleta completa del equipo; los costos indicados son **precios públicos de referencia**, no pagos efectivamente realizados.
+- [`BOM.csv`](BOM.csv): componentes, portapilas y referencias de costo. No se ha recibido una boleta completa del equipo; los costos indicados son **precios públicos de referencia**, no pagos efectivamente realizados.
 - [`fotos/montaje_led_protoboard.jpeg`](fotos/montaje_led_protoboard.jpeg): fotografía real del montaje con LED y ESP8266 en protoboard aportada por el equipo.
 - [`fotos/componentes_esp8266_oled.jpeg`](fotos/componentes_esp8266_oled.jpeg): fotografía real del ESP8266, OLED y controles antes del ensamble final.
 

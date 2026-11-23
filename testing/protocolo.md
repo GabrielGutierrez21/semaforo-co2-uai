@@ -29,3 +29,5 @@
 **Análisis:** comparar al menos tres pares de valores Serie/OLED/web, medir el intervalo real entre registros, contar filas antes y después del reinicio y explicar discrepancias. Si LittleFS no monta, registrar el error y verificar la partición de flash antes de afirmar persistencia.
 
 **Integridad:** cualquier dato, gráfico o captura presentado debe provenir del circuito real. No completar CSV con números simulados.
+
+**Prueba de autonomía con 2 AA:** realizarla solamente después de confirmar el pin de entrada, polaridad y regulación de voltaje según [`hardware/conexiones.md`](../hardware/conexiones.md#alimentacion-con-dos-pilas-aa). Registrar el voltaje en vacío y mientras funciona el Wi‑Fi, el número de reinicios y el tiempo efectivo de operación. El portapilas modelado por sí solo no valida la autonomía.

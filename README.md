@@ -24,10 +24,10 @@ El ESP8266 guarda un registro CSV en **LittleFS** cada 60 segundos cuando hay le
 |---|---|
 | [`firmware/SemaforoAmbiental/`](firmware/SemaforoAmbiental/) | Código vigente: sensor, LED, OLED, servidor local, historial y página integrada. |
 | [`firmware/historico/`](firmware/historico/) | Firmware del primer prototipo, conservado como iteración. |
-| [`iteraciones/`](iteraciones/) | Recorrido desde el primer prototipo hasta la versión con web local. |
+| [`iteraciones/`](iteraciones/) | Primer prototipo y carcasa 3D anterior; recorrido hasta la versión actual. |
 | [`software/`](software/) | Arquitectura, API y funcionamiento de la web local. |
 | [`hardware/`](hardware/) | BOM, conexiones, esquema y fotografías disponibles. |
-| [`diseno-3d/`](diseno-3d/) | Fuente paramétrica y STL de la carcasa; misma carpeta para añadir los archivos Fusion y planos. |
+| [`diseno-3d/`](diseno-3d/) | Carcasa actual: plano, STEP, STL, script para Fusion 360 y paquete original. |
 | [`testing/`](testing/) | Protocolo de comprobación con datos obtenidos de la placa. |
 | [`docs/`](docs/) | Documentos de avance y pauta para la presentación EV3. |
 | [`FUENTES.md`](FUENTES.md) | Librerías, documentación técnica y atribuciones. |
@@ -41,7 +41,7 @@ El ESP8266 guarda un registro CSV en **LittleFS** cada 60 segundos cuando hay le
 
 ## Uso de la aplicación local
 
-1. Encender el equipo por USB. En el celular, conectarse a **Aire-UAI**, clave **AireUAI2026**. El aviso «Sin Internet» en el teléfono es normal: mantener esa red.
+1. Encender el equipo con la alimentación USB usada para las pruebas. La carcasa actual aloja **2 pilas AA**; consultar [la verificación eléctrica](hardware/conexiones.md#alimentacion-con-dos-pilas-aa) antes de usarlas para alimentar la placa. En el celular, conectarse a **Aire-UAI**, clave **AireUAI2026**. El aviso «Sin Internet» en el teléfono es normal: mantener esa red.
 2. Abrir **http://192.168.4.1** en el navegador. La página se adapta a la pantalla del teléfono. Los valores proceden de la placa y muestran `--` si no hay lectura; nunca usa datos de muestra.
 3. Esperar **20 minutos** de acondicionamiento del CCS811 en cada uso y luego **30 muestras** para establecer la referencia de TVOC. Para la exposición, encender el prototipo con suficiente anticipación. Durante la espera la web muestra los números disponibles y la cuenta restante, sin clasificar el aire.
 4. La carita feliz/neutra/triste y los LED reflejan **bajo / medio / alto cambio relativo de TVOC**. Tocar TVOC o eCO₂ abre su explicación. La pantalla OLED muestra números y estado, sin caritas.
