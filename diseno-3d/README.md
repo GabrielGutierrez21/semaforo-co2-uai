@@ -1,18 +1,19 @@
 # Diseño físico y piezas 3D
 
-El diseño **Semáforo Ambiental, revisión E** está disponible en archivos separados para revisar, editar e imprimir. El [paquete original del equipo](SEMAFORO_AMBIENTAL.zip) se conserva como respaldo; los archivos de abajo se extrajeron de ese mismo paquete, sin modificar la geometría.
+La carcasa vigente es **Semáforo Ambiental, revisión G**. Sus archivos de fabricación están organizados por formato:
 
 | Archivo | Uso |
 |---|---|
-| [Plano acotado](Plano.pdf) | Vistas, cotas y comprobaciones de encaje. |
-| [Script para Fusion 360](fusion-script/SemaforoCCS811/SemaforoCCS811.py) y [manifest](fusion-script/SemaforoCCS811/SemaforoCCS811.manifest) | Generan los componentes Base, Tapa y TapaPilas como un diseño directo editable mediante parámetros del script. Es un script, no un archivo `.f3d`. |
-| [Piezas STEP](piezas/) | Intercambio CAD de las tres piezas. |
-| [STL de impresión](impresion/) | Base, tapa superior y tapa deslizante del compartimento de pilas. |
+| [Plano acotado](Plano.pdf) | Vistas, cotas y disposición de los componentes. |
+| [Script para Fusion 360](fusion-script/SemaforoCCS811/SemaforoCCS811.py) y [manifest](fusion-script/SemaforoCCS811/SemaforoCCS811.manifest) | Generan Base, Tapa y TapaPilas como componentes editables; modificar las medidas en `PARAMETROS` del script. |
+| [Piezas STEP](piezas/) | Intercambio CAD de las tres piezas. El STEP de la base se generó con CadQuery desde el script de esta revisión; los STEP de las dos tapas fueron aportados por el equipo. |
+| [STL de impresión](impresion/) | Base, tapa superior y tapa deslizante de las pilas, aportadas por el equipo. |
+| [Paquete STL](Semaforo_STL_impresion.zip) y [paquete del script Fusion](SemaforoCCS811_Fusion.zip) | Archivos originales recibidos del equipo para esta revisión. |
 
 ## Dimensiones y montaje
 
-La base tiene dimensiones exteriores **107 × 131 × 54 mm** (ancho × fondo × alto). La tapa superior mide **107 × 131 × 6 mm** de caja envolvente, incluyendo su labio; la tapa de pilas, **71,1 × 36,6 × 2,6 mm**. Estas medidas figuran en el [plano acotado](Plano.pdf) y se verificaron en los STL. También se deducen del script: ancho interior `W=102` más dos paredes de `2,5` mm; fondo interior `D=126` más dos paredes de `2,5` mm; altura interior `H=50` más piso de `4` mm. El diseño dispone una cuna para portapilas **2 × AA**, una zona para protoboard de 81 × 54 mm, torres para ESP8266 y una cámara ventilada para CCS811.
+La **base mide 98 × 98 × 54 mm** (ancho × fondo × alto); el conjunto con tapa alcanza **98 × 98 × 57 mm**. La tapa superior tiene una caja envolvente de **98 × 98 × 6 mm**, incluido el labio; la tapa de pilas mide **70,6 × 36,6 × 2,6 mm**. El [plano](Plano.pdf) da las cotas de montaje, y estas dimensiones exteriores se verificaron con los STL de la revisión G. En el script, `W=94` y `D=94` son las medidas interiores; cada pared agrega `2` mm. La altura de la base resulta de `H=50` más un piso de `4` mm.
 
-El STL de la tapa está separado verticalmente en el ensamble para mostrar el interior: antes de laminar cada STL se debe colocar la pieza sobre la cama en el programa de impresión. El modelo representa una tapa superior plana y **no incluye abertura ni soporte para la OLED**; hay que definir físicamente su ubicación para que la pantalla numérica sea visible. La geometría del compartimento no resuelve por sí sola la alimentación eléctrica: véase [conexiones](../hardware/conexiones.md).
+La base contiene la cuna del portapilas **2 × AA** bajo la plataforma de la protoboard, torres para el ESP8266, una cámara ventilada para el CCS811, tres orificios frontales para LED, alojamiento para el pulsador posterior y **abertura frontal de 19 × 21 mm para la OLED**. Las [conexiones eléctricas](../hardware/conexiones.md) se documentan por separado.
 
-Para generar el ensamble en Fusion 360: abrir **Utilidades → Scripts y complementos**, agregar la carpeta `fusion-script/SemaforoCCS811` y ejecutar el script. Para editar dimensiones, ajustar su bloque `PARAMETROS`; guardar el documento de Fusion después de generarlo. Los [archivos de la carcasa inicial](../iteraciones/diseno-3d-inicial/) se conservaron aparte para mostrar la evolución.
+Para generar el ensamble en Fusion 360: abrir **Utilidades → Scripts y complementos**, agregar la carpeta `fusion-script/SemaforoCCS811` y ejecutar el script. Guardar el documento de Fusion después de generarlo. Los STL están dispuestos como ensamble; orientar cada pieza sobre su cara de apoyo antes de laminarla. Los [archivos de la carcasa inicial](../iteraciones/diseno-3d-inicial/) se conservan como iteración anterior.

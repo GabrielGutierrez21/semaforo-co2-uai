@@ -23,7 +23,7 @@ Las versiones siguientes son **versiones de referencia para reproducir la compil
 - [Espressif, hoja de datos ESP8266EX](https://documentation.espressif.com/0a-esp8266ex_datasheet_en.html) y [recomendaciones de alimentación](https://docs.espressif.com/projects/esp-techpedia/en/latest/esp-friends/get-started/try-firmware/try-firmware-hardware/esp8266.html): voltaje del chip y margen de corriente de la fuente para Wi‑Fi.
 - Documento de evaluación **Avance #3: Prototipo IoT Completo**, TEI201 DEC UAI, aportado por el equipo en esta conversación (19 de noviembre de 2026).
 
-El archivo [`diseno-3d/SEMAFORO_AMBIENTAL.zip`](diseno-3d/SEMAFORO_AMBIENTAL.zip) fue aportado por el equipo. Los STEP, STL, PDF y script Fusion de [`diseno-3d/`](diseno-3d/) son su contenido extraído y organizado; la carcasa anterior está conservada en [`iteraciones/diseno-3d-inicial/`](iteraciones/diseno-3d-inicial/).
+El [plano](diseno-3d/Plano.pdf), los [STL](diseno-3d/Semaforo_STL_impresion.zip), el [script Fusion](diseno-3d/SemaforoCCS811_Fusion.zip) y los STEP de las dos tapas de la revisión G fueron aportados por el equipo. El STEP de la base se generó desde el script con CadQuery para mantener las tres piezas en el mismo formato. La carcasa inicial está conservada en [`iteraciones/diseno-3d-inicial/`](iteraciones/diseno-3d-inicial/).
 
 ## Uso de inteligencia artificial y adaptación
 

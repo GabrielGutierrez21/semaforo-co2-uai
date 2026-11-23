@@ -27,7 +27,7 @@ El ESP8266 guarda un registro CSV en **LittleFS** cada 60 segundos cuando hay le
 | [`iteraciones/`](iteraciones/) | Primer prototipo y carcasa 3D anterior; recorrido hasta la versión actual. |
 | [`software/`](software/) | Arquitectura, API y funcionamiento de la web local. |
 | [`hardware/`](hardware/) | BOM, conexiones, esquema y fotografías disponibles. |
-| [`diseno-3d/`](diseno-3d/) | Carcasa actual: plano, STEP, STL, script para Fusion 360 y paquete original. |
+| [`diseno-3d/`](diseno-3d/) | Carcasa revisión G: plano acotado, STEP, STL y script para Fusion 360. |
 | [`testing/`](testing/) | Protocolo de comprobación con datos obtenidos de la placa. |
 | [`docs/`](docs/) | Documentos de avance y pauta para la presentación EV3. |
 | [`FUENTES.md`](FUENTES.md) | Librerías, documentación técnica y atribuciones. |
