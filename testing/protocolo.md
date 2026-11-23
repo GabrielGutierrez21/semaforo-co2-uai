@@ -30,4 +30,4 @@
 
 **Integridad:** cualquier dato, gráfico o captura presentado debe provenir del circuito real. No completar CSV con números simulados.
 
-**Prueba de autonomía con 2 AA:** realizarla solamente después de confirmar el pin de entrada, polaridad y regulación de voltaje según [`hardware/conexiones.md`](../hardware/conexiones.md#alimentacion-con-dos-pilas-aa). Registrar el voltaje en vacío y mientras funciona el Wi‑Fi, el número de reinicios y el tiempo efectivo de operación. El portapilas modelado por sí solo no valida la autonomía.
+**Prueba de autonomía con 2 AA:** con positivo en `3V3` y negativo en `GND` según el montaje informado, comprobar polaridad antes de encender y mantener el USB desconectado. Medir la tensión entre esos pines en reposo y mientras funciona el Wi‑Fi, el número de reinicios y el tiempo efectivo de operación; véase [`hardware/conexiones.md`](../hardware/conexiones.md#alimentacion-con-dos-pilas-aa). La carcasa y el cableado no sustituyen esa prueba.
