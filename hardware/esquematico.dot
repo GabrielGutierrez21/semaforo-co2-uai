@@ -9,10 +9,12 @@ graph circuito {
   verde [label="330 Ω ─ LED verde ─ GND", color="#359966"];
   amarillo [label="330 Ω ─ LED amarillo ─ GND", color="#BA912C"];
   rojo [label="330 Ω ─ LED rojo ─ GND", color="#B85852"];
+  pilas [label="Portapilas 2 × AA\n+ → 3V3\n− → GND", fillcolor="#F5E7C5", style="rounded,filled"];
   esp -- ccs [label="D1→SCL  D2→SDA\n3V3→VCC  GND→GND/WAKE"];
   esp -- oled [label="D1→SCL  D2→SDA\n3V3→VCC  GND→GND"];
   esp -- boton [label="D4"];
   esp -- verde [label="D5"];
   esp -- amarillo [label="D6"];
   esp -- rojo [label="D7"];
+  esp -- pilas [label="alimentación reportada\nmedir bajo carga"];
 }

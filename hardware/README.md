@@ -1,6 +1,6 @@
 # Hardware
 
-Los archivos de esta carpeta describen el montaje con **una protoboard**. El esquema representa la alimentación USB comprobable; la carcasa actual incorpora un compartimento para **2 pilas AA**, cuya conexión eléctrica se documenta con sus condiciones en [`conexiones.md`](conexiones.md):
+Los archivos de esta carpeta describen el montaje con **una protoboard** y un portapilas de **2 AA**, con positivo conectado a `3V3` y negativo a `GND`. El cable USB se utiliza para programar y probar con las pilas desconectadas. La [guía de conexiones](conexiones.md) explica cómo medir la tensión bajo carga:
 
 - [`conexiones.md`](conexiones.md): tabla de pines, alimentación, precauciones para 2 AA y procedimiento de comprobación.
 - [`esquematico.pdf`](esquematico.pdf): diagrama funcional de las interconexiones; su fuente editable es [`esquematico.dot`](esquematico.dot).

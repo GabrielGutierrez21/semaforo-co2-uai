@@ -10,19 +10,19 @@ La tabla sigue los nombres **D1...D7 impresos en la placa NodeMCU** y coincide c
 | D5, GPIO14 | Resistencia serie → ánodo LED verde | Estado verde |
 | D6, GPIO12 | Resistencia serie → ánodo LED amarillo | Estado amarillo |
 | D7, GPIO13 | Resistencia serie → ánodo LED rojo | Estado rojo |
-| 3V3 | VCC del CCS811 y de OLED | Alimentación de 3,3 V |
-| GND | GND del sensor/OLED, WAKE del CCS811, cátodos LED, pulsador | Referencia común |
-| USB | Puerto USB del NodeMCU | Alimentación y carga del programa |
+| 3V3 | VCC del CCS811 y de OLED; positivo del portapilas 2 × AA en el montaje informado | Línea de alimentación |
+| GND | Negativo del portapilas, GND del sensor/OLED, WAKE del CCS811, cátodos LED y pulsador | Referencia común |
+| USB | Puerto USB del NodeMCU | Carga del programa y alimentación de prueba, con las pilas desconectadas |
 
-La [carcasa actual](../diseno-3d/) incluye una cuna para **portapilas de 2 AA**. El equipo informa que conectó las pilas directamente a la placa; esa conexión no aparece en el esquema USB y se debe identificar y medir antes de declararla como alimentación autónoma reproducible.
+La [carcasa actual](../diseno-3d/) incluye una cuna para **portapilas de 2 AA**. El montaje informado conecta **positivo a `3V3` y negativo a `GND`**; el [esquema](esquematico.pdf) muestra esa conexión junto con los demás componentes.
 
 ## Alimentación con dos pilas AA
 
-**No asumir que la carcasa de pilas es un circuito de alimentación.** Dos AA entregan aproximadamente 3 V nominales si son alcalinas (2,4 V si son recargables NiMH), y el voltaje baja con la descarga. Esa salida no equivale a 5 V en `VIN` o en el conector USB; tampoco es una fuente regulada de 3,3 V para la línea `3V3`, especialmente cuando el Wi‑Fi demanda corriente. No conectar las dos AA a un pin GPIO. Desconectar las pilas para medir sin alimentación USB.
+**Conexión reportada:** portapilas `+` → `3V3` y portapilas `−` → `GND`. La polaridad debe comprobarse en los cables reales. Dos AA entregan aproximadamente 3 V nominales si son alcalinas (2,4 V si son recargables NiMH), y el voltaje disminuye con el uso. Al entrar por `3V3` se evita el regulador de la placa: esta conexión **no garantiza 3,3 V estables** ni ausencia de reinicios cuando el Wi‑Fi transmite. No conectar el portapilas a un GPIO ni a `VIN` como si fueran 5 V.
 
-Para una versión autónoma reproducible con este NodeMCU, usar **portapilas 2 AA → convertidor elevador adecuado para dos AA → salida regulada de 5 V (al menos 500 mA, preferible mayor margen) → entrada de alimentación de 5 V confirmada en la placa o cable micro USB**, y unir el negativo con GND. Comprobar polaridad y 5 V reales con multímetro antes de conectar el NodeMCU. No unir a ciegas la salida del convertidor con `3V3`, ni alimentar por USB y por un pin externo simultáneamente sin verificar el esquema eléctrico específico de la placa. Esta ruta es una **recomendación técnica**, no se atribuye al montaje ya realizado.
+Para documentar el resultado real, medir el voltaje entre `3V3` y `GND` **con el dispositivo encendido y el punto de acceso Wi‑Fi funcionando**, registrar el tipo de pilas y observar si se reinicia durante una prueba continua. Desconectar las pilas antes de alimentar o programar por USB, salvo que se haya comprobado expresamente el circuito de selección de fuentes de esta versión de NodeMCU. Las pilas alcalinas no se recargan desde el puerto USB.
 
-En la prueba del equipo anotar: tipo y número de pilas, voltaje del portapilas en reposo y con Wi‑Fi activo, pin exacto usado para positivo y negativo, presencia de convertidor/interruptor y duración sin reinicios. Hasta verificar esos datos, el [esquema](esquematico.pdf) y el procedimiento siguiente describen la referencia USB.
+En la prueba del equipo anotar: tipo de pilas, voltaje en reposo y con Wi‑Fi activo, presencia de interruptor y duración sin reinicios. El firmware no cambia según la fuente de alimentación; el registro eléctrico permite evaluar la autonomía de este montaje.
 
 Cada LED lleva **una resistencia propia** (valor objetivo 330 Ω, verificar el valor de las resistencias del montaje real), en serie entre el pin y el ánodo. El LED conduce desde pin → resistencia → ánodo → cátodo → GND. No conectar LEDs directamente a los pines. Si el módulo CCS811 tiene pin `nWAKE/WAKE`, mantenerlo a GND para permitir la comunicación I²C; no se asigna un GPIO a WAKE en este firmware.
 
