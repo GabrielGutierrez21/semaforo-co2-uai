@@ -5,7 +5,7 @@ La evaluación combina **Presentación 3** y **revisión final de GitHub** (50 %
 ## Secuencia
 
 1. Problema concreto de monitorear cambios ambientales en una sala; alcance real del CCS811.
-2. Montaje físico: ESP8266, CCS811, OLED numérica, tres LED y pulsador. Indicar que WAKE va a GND y que sensor y OLED comparten I²C. Mostrar la carcasa actual con su compartimento 2 × AA; describir autonomía solo si su conexión y duración se verificaron según [la guía eléctrica](../hardware/conexiones.md#alimentacion-con-dos-pilas-aa).
+2. Montaje físico: ESP8266, CCS811, OLED numérica, tres LED y pulsador. Indicar que WAKE va a GND y que sensor y OLED comparten I²C. Mostrar la carcasa actual con su compartimento 2 × AA y la conexión reportada `+ → 3V3`, `− → GND`; sustentar la autonomía con una prueba de duración y voltaje bajo carga según [la guía eléctrica](../hardware/conexiones.md#alimentacion-con-dos-pilas-aa).
 3. Abrir la web desde un celular conectado a `Aire-UAI`, en `http://192.168.4.1`. Mostrar TVOC y eCO₂ estimado, carita y LED correspondientes, y abrir ambas tarjetas de explicación.
 4. Mostrar historial CSV que persiste tras reiniciar la placa. Señalar sesiones y segundos desde arranque, sin llamarlos hora real.
 5. Explicar el protocolo, resultados reales que haya documentado el equipo y sus límites. No presentar eCO₂ como CO₂ real ni los colores como umbrales sanitarios.
